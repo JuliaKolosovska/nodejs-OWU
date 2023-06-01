@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Oleh",
+    "age": 20,
+    "gender": "male"
+  },
+  {
+    "name": "Anna",
+    "age": 18,
+    "gender": "female"
+  },
+  {
+    "name": "Max",
+    "age": 25,
+    "gender": "male"
+  },
+  {
+    "name": "Vasya",
+    "age": 22,
+    "gender": "male"
+  },
+  {
+    "name": "Igor",
+    "age": 25,
+    "gender": "male"
+  },
+  {
+    "name": "Alina",
+    "age": 30,
+    "gender": "female"
+  },
+  {
+    "name": "Ruslan",
+    "age": 32,
+    "gender": "male"
+  },
+  {
+    "name": "Ola",
+    "age": 28,
+    "gender": "female"
+  }
+]
