@@ -59,4 +59,3 @@ fs.readdir(mainPath, {withFileTypes: true}, (err, files) => {
         }
     })
 })
-
