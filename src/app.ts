@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, {Request, Response} from "express";
 
 const users = [
     {
@@ -31,7 +31,7 @@ const users = [
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 // CRUD - create, read, update, delete
 
@@ -40,7 +40,7 @@ app.get("/users", (req: Request, res: Response) => {
 });
 
 app.get("/users/:id", (req: Request, res: Response) => {
-    const { id } = req.params;
+    const {id} = req.params;
 
     res.status(200).json(users[+id]);
 });
@@ -54,7 +54,7 @@ app.post("/users", (req: Request, res: Response) => {
 });
 
 app.put("/users/:id", (req: Request, res: Response) => {
-    const { id } = req.params;
+    const {id} = req.params;
 
     users[+id] = req.body;
 
@@ -65,7 +65,7 @@ app.put("/users/:id", (req: Request, res: Response) => {
 });
 
 app.delete("/users/:id", (req: Request, res: Response) => {
-    const { id } = req.params;
+    const {id} = req.params;
 
     users.splice(+id, 1);
 
@@ -74,8 +74,9 @@ app.delete("/users/:id", (req: Request, res: Response) => {
     });
 });
 
+
 const PORT = 5001;
 
 app.listen(PORT, () => {
-    console.log(`Server has started on PORT ${PORT} 🥸`);
+    console.log(`Server has started on PORT ${PORT}`);
 });
