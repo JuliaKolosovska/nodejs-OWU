@@ -5,19 +5,37 @@ import {IUser} from "../types/user.types";
 
 class UserService {
     public async findAll(): Promise<IUser[]> {
-        try {
-            return await User.find().select("-password");
-        } catch (e) {
-            throw new ApiError(e.message, e.status);
-        }
+        return await User.find();
     }
 
-      public async create(data: IUser): Promise<IUser> {
+    public async create(data: IUser): Promise<IUser> {
         return await userRepository.create(data);
     }
 
+    public async updateById(userId: string, dto: Partial<IUser>): Promise<IUser> {
+        await this.getOneByIdOrThrow(userId);
+        return await User.findOneAndUpdate({_id: userId}, {...dto}, {returnDocument: 'after'})
+
+    }
+
+    public async deleteById(userId: string): Promise<void> {
+        await this.getOneByIdOrThrow(userId);
+        await User.deleteOne({_id: userId})
+
+    }
+
     public async findById(id: string): Promise<IUser> {
-        return await User.findById(id);
+        return await this.getOneByIdOrThrow(id);
+
+    }
+
+    private async getOneByIdOrThrow(userId: string): Promise<IUser> {
+
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new ApiError('User not found', 422)
+        }
+        return user;
     }
 }
 
