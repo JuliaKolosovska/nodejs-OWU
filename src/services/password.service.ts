@@ -3,7 +3,7 @@ import {configs} from '../configs/config';
 
 class PasswordService {
     public async hash(password: string): Promise<string> {
-        return bcrypt.hash(password, configs.SECRET_SALT)
+        return bcrypt.hash(password, +configs.SECRET_SALT)
     }
 
     public async compare(password: string, hashedPassword: string): Promise<boolean> {

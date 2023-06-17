@@ -16,3 +16,5 @@ const tokensSchema = new Schema({
         ref:User,
     }
 })
+
+export const Token = model("token", tokensSchema);
