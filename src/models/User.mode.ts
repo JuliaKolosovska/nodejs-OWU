@@ -27,6 +27,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
         select:false
+    },
+    isActivated:{
+        type:Boolean,
+        default: false
     }
 })
 
