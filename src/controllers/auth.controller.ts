@@ -1,17 +1,18 @@
 import {Request, Response, NextFunction} from 'express'
-import { authService } from '../services/auth.service';
-import {ITokenPayload, ITokensPair } from '../types/token.types';
+import {authService} from '../services/auth.service';
+import {ITokenPayload, ITokensPair} from '../types/token.types';
 
 class AuthController {
-    public async register(req: Request, res: Response, next: NextFunction){
+    public async register(req: Request, res: Response, next: NextFunction) {
 
-        try{
+        try {
             await authService.register(req.body);
             return res.sendStatus(201);
-        }catch(e){
+        } catch (e) {
             next(e);
         }
     }
+
     public async login(
         req: Request,
         res: Response,
@@ -31,13 +32,13 @@ class AuthController {
         }
     }
 
-public async changePassword(
+    public async changePassword(
         req: Request,
         res: Response,
         next: NextFunction
     ): Promise<Response<ITokensPair>> {
         try {
-            const {_id:userId}=req.res.locals.tokenPayload as ITokenPayload;
+            const {_id: userId} = req.res.locals.tokenPayload as ITokenPayload;
             await authService.changePassword(
                 req.body,
                 userId);
@@ -54,8 +55,8 @@ public async changePassword(
         next: NextFunction
     ): Promise<Response<ITokensPair>> {
         try {
-            const oldTokenPair =req.res.locals.oldTokenPair as ITokensPair;
-            const tokenPayload =req.res.locals.tokenPayload as ITokenPayload;
+            const oldTokenPair = req.res.locals.oldTokenPair as ITokensPair;
+            const tokenPayload = req.res.locals.tokenPayload as ITokenPayload;
 
             const tokensPair = await authService.refresh(
                 oldTokenPair,
@@ -67,14 +68,15 @@ public async changePassword(
             next(e);
         }
     }
+
     public async forgotPassword(
         req: Request,
         res: Response,
         next: NextFunction
-    ){
+    ) {
         try {
-            const {user}=req.res.locals;
-            await authService.forgotPassword(user._id,req.body.email);
+            const {user} = req.res.locals;
+            await authService.forgotPassword(user._id, req.body.email);
             return res.sendStatus(200)
         } catch (e) {
             next(e);
@@ -87,8 +89,8 @@ public async changePassword(
         next: NextFunction
     ): Promise<Response<void>> {
         try {
-            const { password } = req.body;
-            const { jwtPayload } = req.res.locals;
+            const {password} = req.body;
+            const {jwtPayload} = req.res.locals;
 
             await authService.setForgotPassword(
                 password,
@@ -97,6 +99,22 @@ public async changePassword(
             );
 
             return res.sendStatus(200);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    public async activate(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response<void>> {
+        try {
+
+            const {jwtPayload} = req.res.locals
+            await authService.activate(jwtPayload);
+
+            return res.sendStatus(201);
         } catch (e) {
             next(e);
         }

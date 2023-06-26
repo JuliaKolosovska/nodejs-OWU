@@ -13,6 +13,11 @@ router.post(
     userMiddleware.findAndThrow("email"),
     authController.register
 );
+router.put(
+    "/register/:token",
+    authMiddleware.checkActionToken(EActionTokenTypes.Activate),
+    authController.activate
+);
 
 router.post(
     "/login",
@@ -47,6 +52,7 @@ router.put(
     authMiddleware.checkActionToken(EActionTokenTypes.Forgot),
     authController.setForgotPassword
 );
+
 
 
 export const authRouter=router;
