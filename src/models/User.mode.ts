@@ -26,18 +26,23 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        trim:true,
-        lowercase:true,
+        trim: true,
+        lowercase: true,
     },
     password: {
         type: String,
         required: true,
-        select:false
+        select: false
     },
-    isActivated:{
-        type:Boolean,
+    isActivated: {
+        type: Boolean,
         default: false
-    }
-})
+    },
+},
+{
+    versionKey: false,
+        timestamps: true,
+}
+)
 
 export const User=model('user', userSchema)
