@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
+
 import { EActionTokenTypes } from "../enums/action-token-type-enum";
 import { ETokenType } from "../enums/token-type.enum";
-
 import { ApiError } from "../errors";
 import { Action } from "../models/Action.model";
 import { Token } from "../models/Token.model";
@@ -33,6 +33,7 @@ class AuthMiddleware {
             next(e);
         }
     }
+
     public async checkRefreshToken(
         req: Request,
         res: Response,

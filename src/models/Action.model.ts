@@ -1,8 +1,7 @@
-import {model, Schema, Types} from "mongoose";
+import { model, Schema, Types } from "mongoose";
+
 import { EActionTokenTypes } from "../enums/action-token-type-enum";
-import {User} from "./User.mode";
-
-
+import { User } from "./User.mode";
 
 const actionSchema = new Schema({
     actionToken: {
@@ -18,7 +17,7 @@ const actionSchema = new Schema({
         type: Types.ObjectId,
         required: true,
         ref: User,
-    }
-})
+    },
+});
 
 export const Action = model("action", actionSchema);

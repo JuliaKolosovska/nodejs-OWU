@@ -1,6 +1,6 @@
 import { IUser } from "./user.types";
 
-export interface ITokensPair{
+export interface ITokensPair {
     accessToken: string;
     refreshToken: string;
 }

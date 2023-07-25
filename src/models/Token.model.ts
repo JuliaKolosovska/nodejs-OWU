@@ -1,7 +1,9 @@
-import {model, Schema, Types} from "mongoose";
-import {User} from "./User.mode";
+import { model, Schema, Types } from "mongoose";
 
-const tokensSchema = new Schema({
+import { User } from "./User.mode";
+
+const tokensSchema = new Schema(
+    {
         accessToken: {
             type: String,
             required: true,
@@ -14,8 +16,9 @@ const tokensSchema = new Schema({
             type: Types.ObjectId,
             required: true,
             ref: User,
-        }
+        },
     },
-    {versionKey: false, timestamps: true})
+    { versionKey: false, timestamps: true }
+);
 
 export const Token = model("token", tokensSchema);

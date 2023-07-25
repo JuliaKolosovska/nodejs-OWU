@@ -1,4 +1,4 @@
-export enum EActionTokenTypes{
-    Forgot='forgot',
-    Activate='activate'
+export enum EActionTokenTypes {
+    Forgot = "forgot",
+    Activate = "activate",
 }

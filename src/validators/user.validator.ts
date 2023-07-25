@@ -1,6 +1,7 @@
 import Joi from "joi";
-import {regexConstants} from "../constants";
-import {EGenders} from "../enums/user.enum";
+
+import { regexConstants } from "../constants";
+import { EGenders } from "../enums/user.enum";
 
 export class UserValidator {
     static firstName = Joi.string().min(3).max(30).trim();
@@ -29,17 +30,21 @@ export class UserValidator {
         age: this.age,
         gender: this.gender,
     });
+
     static login = Joi.object({
         email: this.email.required(),
         password: this.password.required(),
     });
+
     static changePassword = Joi.object({
         oldPassword: this.password.required(),
         newPassword: this.password.required(),
     });
+
     static forgotPassword = Joi.object({
         email: this.email.required(),
     });
+
     static setForgotPassword = Joi.object({
         password: this.password.required(),
     });

@@ -1,19 +1,23 @@
-import {Router} from 'express';
-import { authController } from '../controllers/auth.controller';
-import { EActionTokenTypes } from '../enums/action-token-type-enum';
-import {authMiddleware, commonMiddleware, userMiddleware } from '../middlewares';
-import { ICredentials } from '../types/token.types';
-import { IUser } from '../types/user.types';
-import { UserValidator } from '../validators';
+import { Router } from "express";
 
-const router=Router();
+import { authController } from "../controllers/auth.controller";
+import { EActionTokenTypes } from "../enums/action-token-type-enum";
+import { commonMiddleware, userMiddleware } from "../middlewares";
+import { authMiddleware } from "../middlewares/auth.middleware";
+import { ICredentials } from "../types/token.types";
+import { IUser } from "../types/user.types";
+import { UserValidator } from "../validators";
+
+const router = Router();
+
 router.post(
     "/register",
     commonMiddleware.isBodyValid(UserValidator.create),
     userMiddleware.findAndThrow("email"),
     authController.register
 );
-router.put(
+
+router.post(
     "/register/:token",
     authMiddleware.checkActionToken(EActionTokenTypes.Activate),
     authController.activate
@@ -53,6 +57,4 @@ router.put(
     authController.setForgotPassword
 );
 
-
-
-export const authRouter=router;
+export const authRouter = router;
